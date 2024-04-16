@@ -12,18 +12,17 @@ public class CompanyService : ICompanyService
     {
         _unitOfWork = work;
     }
-    public void RegisterCompany(Company company)
+    public long RegisterCompany(Company company)
     {
         var comp = _unitOfWork.CompanyRepository.GetByName(company.Name);
         if (comp != null)
-            return;
+            return -1;
         
         _unitOfWork.BeginTransaction();
         _unitOfWork.CompanyRepository.Add(company);
         _unitOfWork.CommitTransaction();
         _unitOfWork.Save();
-      
-    
+        return _unitOfWork.CompanyRepository.GetByName(company.Name).Id;
     }
     public void DeleteCompany(long companyId)
     {
@@ -37,18 +36,19 @@ public class CompanyService : ICompanyService
         }
     }
 
-    public void AddEmployeeToCompany(long employeeId, long companyId)
+    public long AddEmployeeToCompany(long employeeId, long companyId)
     {
         var comp = _unitOfWork.CompanyRepository.GetById(companyId);
         var emp = _unitOfWork.EmployeeRepository.GetById(employeeId);
         
         if (comp == null || emp == null)
-            return;
+            return -1;
         _unitOfWork.BeginTransaction();
         comp.Employees.Add(emp);
         _unitOfWork.CompanyRepository.Update(comp);
         _unitOfWork.CommitTransaction();
         _unitOfWork.Save();
+        return emp.Id;
     }
     
 }

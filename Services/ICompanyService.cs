@@ -4,8 +4,9 @@ namespace EmployeeManagement.Services;
 
 public interface ICompanyService
 {
-    public void RegisterCompany(Company company);
+    public long RegisterCompany(Company company);
     
-    public void AddEmployeeToCompany(long employeeId, long companyId);
-    
+    public long AddEmployeeToCompany(long employeeId, long companyId);
+
+    public void DeleteCompany(long id);
 }
