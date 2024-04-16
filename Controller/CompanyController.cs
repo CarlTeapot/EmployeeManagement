@@ -30,6 +30,7 @@ public class CompanyController : ControllerBase
         _companyService.DeleteCompany(companyId);
         return Ok("Success");
     }
+    [HttpPost("add-employee-to-company/{employeeId}/{companyId}")]
 
     public IActionResult AddEmployeeToCompany(long employeeId, long companyId)
     {

@@ -30,8 +30,7 @@ public class EmployeeDBContext : DbContext
             .HasKey(e => e.Id);
 
         modelBuilder.Entity<Employee>()
-            .HasIndex(u => u.Email)
-            .IsUnique();
+            .HasIndex(u => u.Email);
         modelBuilder.Entity<Employee>()
             .HasIndex(u => u.isActive);
 
@@ -55,7 +54,7 @@ public class EmployeeDBContext : DbContext
             .HasForeignKey(e => e.CompanyId); // Foreign key
         
         modelBuilder.Entity<Company>()
-            .HasIndex(u => u.Name).IsUnique();
+            .HasIndex(u => u.Name);
         modelBuilder.Entity<Company>().HasIndex(u => u.CeoEmail);
 
     }

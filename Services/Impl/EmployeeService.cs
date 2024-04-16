@@ -17,7 +17,7 @@ public class EmployeeService : IEmployeeService
     public void RegisterEmployee(Employee employee)
     {
         var emp = _unitOfWork.EmployeeRepository.GetByEmail(employee.Email);
-        if (emp != null)
+        if (emp != null && emp.isActive)
             return;
 
         _unitOfWork.BeginTransaction();

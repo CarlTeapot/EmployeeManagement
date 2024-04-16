@@ -15,7 +15,7 @@ public class CompanyService : ICompanyService
     public long RegisterCompany(Company company)
     {
         var comp = _unitOfWork.CompanyRepository.GetByName(company.Name);
-        if (comp != null)
+        if (comp != null && comp.IsActive)
             return -1;
         
         _unitOfWork.BeginTransaction();
